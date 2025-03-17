@@ -1,4 +1,3 @@
-import { AccordionForms, FormApplicationProps } from "@/components/template/application/form";
 import { AccordionTrigger, AccordionItem, AccordionContent } from "@/components/ui/accordion";
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -8,6 +7,7 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { AccordionForms, FormApplicationProps } from "@/app/services/application";
 
 export const ScheduleInformation = ({ form }: FormApplicationProps) => {
     return (
@@ -66,7 +66,7 @@ export const ScheduleInformation = ({ form }: FormApplicationProps) => {
                 name="endDate"
                 render={({ field }) => (
                     <FormItem className="flex flex-col">
-                    <FormLabel>Start date:</FormLabel>
+                    <FormLabel>End date:</FormLabel>
                     <Popover>
                         <PopoverTrigger asChild>
                         <FormControl>

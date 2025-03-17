@@ -1,4 +1,3 @@
-import { AccordionForms, FormApplicationProps } from "@/components/template/application/form";
 import { AccordionTrigger, AccordionItem, AccordionContent } from "@/components/ui/accordion";
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -8,6 +7,7 @@ import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
+import { AccordionForms, FormApplicationProps } from "@/app/services/application";
 
 
 
