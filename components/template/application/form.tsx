@@ -2,7 +2,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Accordion } from "@/components/ui/accordion";
@@ -11,11 +10,11 @@ import { WorksiteInformation } from "@/components/layout/application/worksite";
 import { SupervisorInformation } from "@/components/layout/application/supervisor";
 import { ScheduleInformation } from "@/components/layout/application/schedule";
 import { AccordionForms, ApplicationFormData, formSchema } from "@/app/services/application";
+import { useApplication } from "@/app/hooks/useApplication";
 
 
 export const ApplicationForm = () => {
    
-    
       const [formsOpened, setFormsOpened] = useState<string[]>([AccordionForms.STUDENTS]);
       const form = useForm<ApplicationFormData>({
         resolver: zodResolver(formSchema),
@@ -41,7 +40,7 @@ export const ApplicationForm = () => {
           jobDescription: ""
         },
       });
-    
+      const { onSubmit, onSubmitError } = useApplication(form)
       const { errors } = form.formState
     
       
@@ -88,30 +87,7 @@ export const ApplicationForm = () => {
         updateAccordionState()
       }, [updateAccordionState]); // Trigger this effect whenever errors change
     
-      const onSubmitError = async () => {
-        const isValid = await form.trigger();
-        if (!isValid) {
-          console.log("Form is invalid");
-          // The useEffect above will handle updating the accordion state based on errors
-        }
-      };
-    
-      const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        try {
-            const response = await fetch("/api/application", {
-                method: 'POST',
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(values)
-            })
-            const content = await response.json()
-            console.log(content)
-        } catch(e) {
-            console.log(e)
-        }
-      }
+     
     
       return (
         <Form {...form}>
