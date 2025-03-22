@@ -7,7 +7,7 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { AccordionForms, FormApplicationProps } from "@/app/services/application";
+import { AccordionForms, disableDaysBeforeToday, FormApplicationProps } from "@/app/services/application";
 
 export const ScheduleInformation = ({ form }: FormApplicationProps) => {
     return (
@@ -49,9 +49,7 @@ export const ScheduleInformation = ({ form }: FormApplicationProps) => {
                             mode="single"
                             selected={field.value}
                             onSelect={field.onChange}
-                            disabled={(date) =>
-                            date > new Date() || date < new Date("1900-01-01")
-                            }
+                            disabled={(date) => disableDaysBeforeToday(date)}
                             initialFocus
                         />
                         </PopoverContent>
@@ -91,9 +89,7 @@ export const ScheduleInformation = ({ form }: FormApplicationProps) => {
                             mode="single"
                             selected={field.value}
                             onSelect={field.onChange}
-                            disabled={(date) =>
-                            date > new Date() || date < new Date("1900-01-01")
-                            }
+                            disabled={(date) => disableDaysBeforeToday(date)}
                             initialFocus
                         />
                         </PopoverContent>
