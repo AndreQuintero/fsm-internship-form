@@ -1,4 +1,5 @@
 import { ApplicationFormData, formSchema } from "@/app/services/application";
+
 import { auth } from "@/app/services/google";
 import { ErrorTypes } from "@/app/types/response";
 import { google, Auth } from "googleapis";
@@ -55,13 +56,24 @@ export async function POST(request: Request) {
                     values
                 }
             })
-            return NextResponse.json({ success: true })
         } catch{
             return NextResponse.json(
                 { success: false, type: ErrorTypes.INTEGRATION_ERROR, errors: "Failed to submit data to Google Sheets. Please try again later." },
                 { status: 500 }
             );
-        } 
+        }
+
+        try {
+            if(Boolean(process.env.EMAILJS_ENABLED)) {
+                await sendEmail(parsedBody)
+            }    
+        } catch(e) {
+            console.log("Error to send email" + e)
+        }
+        return NextResponse.json(
+            { success: true },
+            { status: 200 }
+        )
     }
   
     // If validation errors, map them into an object
@@ -71,4 +83,27 @@ export async function POST(request: Request) {
   
     // Respond with a JSON object containing the validation errors
     return NextResponse.json({ success: false, type: ErrorTypes.SCHEMA_VALIDATION, errors: serverErrors }, {status: 400})
+  }
+
+
+  const sendEmail = async (data: ApplicationFormData) => {
+    const params = {
+        service_id: process.env.EMAILJS_SERVICE_ID,
+        template_id: process.env.EMAILJS_TEMPLATE_ID,
+        user_id: process.env.EMAILJS_PUBLIC_KEY,
+        template_params: {
+            name: data.name,
+            title: "Form Internship Application",
+            email: data.email
+        },
+        accessToken: process.env.EMAILJS_PRIVATE_KEY
+    }
+    return await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: 'POST',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(params)
+    })
   }
