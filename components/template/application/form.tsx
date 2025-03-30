@@ -11,6 +11,7 @@ import { SupervisorInformation } from "@/components/layout/application/superviso
 import { ScheduleInformation } from "@/components/layout/application/schedule";
 import { AccordionForms, ApplicationFormData, formSchema } from "@/app/services/application";
 import { useApplication } from "@/app/hooks/useApplication";
+import { LoaderPinwheel } from "lucide-react";
 
 
 export const ApplicationForm = () => {
@@ -41,7 +42,7 @@ export const ApplicationForm = () => {
         },
       });
       const { onSubmit, onSubmitError } = useApplication(form)
-      const { errors } = form.formState
+      const { errors, isSubmitting } = form.formState
     
       
       const updateAccordionState = useCallback(() => {
@@ -98,7 +99,12 @@ export const ApplicationForm = () => {
                 <SupervisorInformation form={form}/>
                 <ScheduleInformation form={form}/>
               </Accordion>
-              <Button className="w-full lg:w-fit" type="submit">Submit</Button>
+              <Button className="w-full lg:w-fit" disabled={isSubmitting} type="submit">{isSubmitting ? (
+                 <div className="flex items-center gap-2">
+                 <LoaderPinwheel className="animate-spin h-4 w-4" />
+                 <span>Submitting...</span>
+               </div>
+              ) : "Submit" }</Button>
             </form>
         </Form>
       )
