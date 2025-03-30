@@ -48,7 +48,7 @@ export async function POST(request: Request) {
            
             await googleSheets.spreadsheets.values.append({
                 auth,
-                range: "Sheet1!A1:B2",
+                range: `${process.env.SHEET_APPLICATION_NAME}!A1:B2`,
                 spreadsheetId: id,
                 valueInputOption: "USER_ENTERED",
                 insertDataOption: "INSERT_ROWS",
