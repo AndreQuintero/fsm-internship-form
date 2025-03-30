@@ -1,13 +1,12 @@
 import { AccordionTrigger, AccordionItem, AccordionContent } from "@/components/ui/accordion";
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { AccordionForms, disableDaysBeforeToday, FormApplicationProps } from "@/app/services/application";
+import { DatePicker } from "@/components/ui/date-picker";
 
 export const ScheduleInformation = ({ form }: FormApplicationProps) => {
     return (
@@ -25,8 +24,7 @@ export const ScheduleInformation = ({ form }: FormApplicationProps) => {
                 render={({ field }) => (
                     <FormItem className="flex flex-col">
                     <FormLabel>Start date:</FormLabel>
-                    <Popover>
-                        <PopoverTrigger asChild>
+                    <DatePicker date={field.value} onChange={field.onChange} onDisable={disableDaysBeforeToday}>
                         <FormControl>
                             <Button
                             variant={"outline"}
@@ -43,17 +41,7 @@ export const ScheduleInformation = ({ form }: FormApplicationProps) => {
                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                             </Button>
                         </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            disabled={(date) => disableDaysBeforeToday(date)}
-                            initialFocus
-                        />
-                        </PopoverContent>
-                    </Popover>
+                    </DatePicker>
                     <FormDescription>Insert Your start date here.</FormDescription>
                     <FormMessage />
                     </FormItem>
@@ -65,8 +53,7 @@ export const ScheduleInformation = ({ form }: FormApplicationProps) => {
                 render={({ field }) => (
                     <FormItem className="flex flex-col">
                     <FormLabel>End date:</FormLabel>
-                    <Popover>
-                        <PopoverTrigger asChild>
+                    <DatePicker date={field.value} onChange={field.onChange} onDisable={disableDaysBeforeToday}>
                         <FormControl>
                             <Button
                             variant={"outline"}
@@ -83,17 +70,7 @@ export const ScheduleInformation = ({ form }: FormApplicationProps) => {
                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                             </Button>
                         </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            disabled={(date) => disableDaysBeforeToday(date)}
-                            initialFocus
-                        />
-                        </PopoverContent>
-                    </Popover>
+                    </DatePicker>
                     <FormDescription>Insert Your end date here.</FormDescription>
                     <FormMessage />
                     </FormItem>
