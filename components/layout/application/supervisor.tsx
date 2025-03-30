@@ -1,6 +1,6 @@
 import { AccordionForms, FormApplicationProps } from "@/app/services/application";
 import { AccordionTrigger, AccordionItem, AccordionContent } from "@/components/ui/accordion";
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
 export const SupervisorInformation = ({ form }: FormApplicationProps) => {
@@ -18,14 +18,11 @@ export const SupervisorInformation = ({ form }: FormApplicationProps) => {
                 name="supervisorName"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Full Name:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        Insert your Supervisor&apos;s full name here.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>Full Name:</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
                     </FormItem>
                 )}
                 />
@@ -34,14 +31,11 @@ export const SupervisorInformation = ({ form }: FormApplicationProps) => {
                 name="title"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Title:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        Insert your Supervisor&apos;s title here.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>Title:</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
                     </FormItem>
                 )}
                 />
@@ -50,14 +44,11 @@ export const SupervisorInformation = ({ form }: FormApplicationProps) => {
                 name="supervisorEmail"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Email:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        Insert your Supervisor&apos;s email here.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>Email:</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
                     </FormItem>
                 )}
                 />
@@ -66,14 +57,11 @@ export const SupervisorInformation = ({ form }: FormApplicationProps) => {
                 name="supervisorPhone"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Phone:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        Insert your Supervisor&apos;s phone number here.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>Phone:</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
                     </FormItem>
                 )}
                 />

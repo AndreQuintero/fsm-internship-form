@@ -42,7 +42,6 @@ export const ScheduleInformation = ({ form }: FormApplicationProps) => {
                             </Button>
                         </FormControl>
                     </DatePicker>
-                    <FormDescription>Insert Your start date here.</FormDescription>
                     <FormMessage />
                     </FormItem>
                 )}
@@ -71,7 +70,6 @@ export const ScheduleInformation = ({ form }: FormApplicationProps) => {
                             </Button>
                         </FormControl>
                     </DatePicker>
-                    <FormDescription>Insert Your end date here.</FormDescription>
                     <FormMessage />
                     </FormItem>
                 )}
@@ -81,12 +79,12 @@ export const ScheduleInformation = ({ form }: FormApplicationProps) => {
                 name="jobDescription"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Job description <span className="text-slate-400">(at least 3 pointers)</span>:</FormLabel>
+                    <FormLabel>Primary Responsabilities<span className="text-slate-400">(at least 3 pointers)</span>:</FormLabel>
                     <FormControl>
                         <Textarea className="resize-none" {...field}/>
                     </FormControl>
                     <FormDescription>
-                        Insert your job description here.
+                        (Ex: Help in the children&apos;s ministry)
                     </FormDescription>
                     <FormMessage />
                     </FormItem>

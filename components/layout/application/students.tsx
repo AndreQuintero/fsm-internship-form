@@ -1,5 +1,5 @@
 import { AccordionTrigger, AccordionItem, AccordionContent } from "@/components/ui/accordion";
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
@@ -16,7 +16,7 @@ export const StudentsInformation = ({ form }: FormApplicationProps) => {
         <AccordionItem value={AccordionForms.STUDENTS}>
             <AccordionTrigger>
             <div className="mt-3 mb-3">
-                <h2 className="font-bold text-xl lg:text-3xl">Students Information</h2>
+                <h2 className="font-bold text-xl lg:text-3xl">Student&apos;s Information</h2>
             </div>
             </AccordionTrigger>
             <AccordionContent>
@@ -30,7 +30,6 @@ export const StudentsInformation = ({ form }: FormApplicationProps) => {
                     <FormControl>
                         <Input {...field} />
                     </FormControl>
-                    <FormDescription>Insert your full name here.</FormDescription>
                     <FormMessage />
                     </FormItem>
                 )}
@@ -73,7 +72,6 @@ export const StudentsInformation = ({ form }: FormApplicationProps) => {
                     <FormControl>
                         <Input {...field} />
                     </FormControl>
-                    <FormDescription>Insert your email here.</FormDescription>
                     <FormMessage />
                     </FormItem>
                 )}

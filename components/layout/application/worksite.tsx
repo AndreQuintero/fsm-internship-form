@@ -1,6 +1,6 @@
 import { AccordionForms, FormApplicationProps } from "@/app/services/application";
 import { AccordionTrigger, AccordionItem, AccordionContent } from "@/components/ui/accordion";
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
 export const WorksiteInformation = ({ form }: FormApplicationProps) => {
@@ -18,14 +18,11 @@ export const WorksiteInformation = ({ form }: FormApplicationProps) => {
                 name="organizationName"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Church/Organization name:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        Insert your Church/Organization name here.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>Church/Organization name:</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
                     </FormItem>
                 )}
                 />
@@ -34,14 +31,11 @@ export const WorksiteInformation = ({ form }: FormApplicationProps) => {
                 name="webpage"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Website/Facebook page:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        Insert your Website/Facebook page here.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>Website/Facebook page:</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
                     </FormItem>
                 )}
                 />
@@ -50,14 +44,11 @@ export const WorksiteInformation = ({ form }: FormApplicationProps) => {
                 name="streetLine1"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Street Line 1:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        Insert your Street Line 1 here.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>Street Line 1:</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
                     </FormItem>
                 )}
                 />
@@ -66,14 +57,11 @@ export const WorksiteInformation = ({ form }: FormApplicationProps) => {
                 name="streetLine2"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Street Line 2:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        Insert your Street Line 2 here.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>Street Line 2:</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
                     </FormItem>
                 )}
                 />
@@ -82,14 +70,11 @@ export const WorksiteInformation = ({ form }: FormApplicationProps) => {
                 name="streetLine3"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Street Line 3:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        Insert your Street Line 3 here.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>Street Line 3:</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
                     </FormItem>
                 )}
                 />
@@ -98,14 +83,11 @@ export const WorksiteInformation = ({ form }: FormApplicationProps) => {
                 name="city"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>City:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        Insert your City here.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>City:</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
                     </FormItem>
                 )}
                 />
@@ -114,14 +96,11 @@ export const WorksiteInformation = ({ form }: FormApplicationProps) => {
                 name="state"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>State:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        Insert your state here.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>State:</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
                     </FormItem>
                 )}
                 />
@@ -130,14 +109,11 @@ export const WorksiteInformation = ({ form }: FormApplicationProps) => {
                 name="nation"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Nation:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        Insert your nation here.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>Nation:</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
                     </FormItem>
                 )}
                 />
@@ -146,14 +122,11 @@ export const WorksiteInformation = ({ form }: FormApplicationProps) => {
                 name="zipCode"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Zip code:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        Insert your zip code here.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>Zip code:</FormLabel>
+                        <FormControl>
+                            <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
                     </FormItem>
                 )}
                 />
