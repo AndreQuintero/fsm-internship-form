@@ -121,3 +121,14 @@
     @apply bg-background text-foreground font-sans;
   }
 }
+
+.sigCanvas {
+  width: 100% !important;
+  height: 200px;
+}
+
+@media screen and (max-width: 768px){
+  .sigCanvas {
+    height: 220px;
+  }
+}
