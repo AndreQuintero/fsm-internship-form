@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useFormContext } from "react-hook-form";
 import SignatureCanvas from "react-signature-canvas"
 import { Button } from "./button";
@@ -10,6 +10,7 @@ type SignaturePadType = {
 export const SignaturePad = ({ name }: SignaturePadType) => {
     const sigCanvas = useRef<SignatureCanvas>(null)
     const { setValue, watch } = useFormContext()
+    const [isInitialized, setIsInitialized] = useState(false)
 
     const handleClear = () => {
         sigCanvas.current?.clear();
@@ -23,10 +24,40 @@ export const SignaturePad = ({ name }: SignaturePadType) => {
         }
     }
 
+    // Save signature on resize
     useEffect(() => {
-        setValue(name, "", { shouldValidate: false})
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+      const handleResize = () => {
+          if (sigCanvas.current && watch(name)) {
+              // Temporarily store the signature
+              const signatureData = watch(name);
+              
+              // Clear and resize
+              sigCanvas.current.clear();
+              
+              // Wait for the next tick to redraw
+              setTimeout(() => {
+                  if (signatureData && sigCanvas.current) {
+                      sigCanvas.current.fromDataURL(signatureData);
+                  }
+              }, 100);
+          }
+      };
+
+      window.addEventListener('resize', handleResize);
+      
+      return () => {
+          window.removeEventListener('resize', handleResize);
+      };
+  }, [watch, name]);
+
+  // Initialize with empty value
+  useEffect(() => {
+      if (!isInitialized) {
+          setValue(name, "", { shouldValidate: false });
+          setIsInitialized(true);
+      }
+  }, [name, setValue, isInitialized]);
+
   return (
     <>
        <div className="border rounded-md p-2 mb-2">
