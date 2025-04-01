@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react"
 import { useFormContext } from "react-hook-form";
 import SignatureCanvas from "react-signature-canvas"
 import { Button } from "./button";
@@ -7,7 +7,11 @@ type SignaturePadType = {
     name: string
 }
 
-export const SignaturePad = ({ name }: SignaturePadType) => {
+export type SignaturePadRef = {
+  clear: () => void
+}
+
+export const SignaturePad = forwardRef<SignaturePadRef, SignaturePadType>(({ name }, ref) => {
     const sigCanvas = useRef<SignatureCanvas>(null)
     const { setValue, watch } = useFormContext()
     const [isInitialized, setIsInitialized] = useState(false)
@@ -58,6 +62,12 @@ export const SignaturePad = ({ name }: SignaturePadType) => {
       }
   }, [name, setValue, isInitialized]);
 
+  useImperativeHandle(ref, () => ({
+    clear: () => {
+        sigCanvas.current?.clear()
+    }
+  }))
+
   return (
     <>
        <div className="border rounded-md p-2 mb-2">
@@ -65,7 +75,7 @@ export const SignaturePad = ({ name }: SignaturePadType) => {
           ref={sigCanvas}
           penColor="black"
           canvasProps={{
-            className: "sigCanvas h-[200px] max-md:h-[220px]",
+            className: "sigCanvas w-full h-[200px] max-md:h-[220px]",
           }}
           onEnd={handleEnd}
         />
@@ -90,4 +100,6 @@ export const SignaturePad = ({ name }: SignaturePadType) => {
         
     </>
   )
-}
+})
+
+SignaturePad.displayName = "SignaturePad"

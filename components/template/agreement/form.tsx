@@ -1,4 +1,5 @@
 'use client'
+import { useAgreement } from "@/app/hooks/useAgreement";
 import { AgreementFormData, formSchema, studentTermsAndConditions, supervisorTermsAndConditions } from "@/app/services/agreement";
 import { disableDaysBeforeToday } from "@/app/services/application";
 import { TermsAndConditions } from "@/components/layout/agreement/terms-conditions";
@@ -7,16 +8,18 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { DatePicker } from "@/components/ui/date-picker";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { SignaturePad } from "@/components/ui/signature-pad";
+import { SignaturePad, SignaturePadRef } from "@/components/ui/signature-pad";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon, LoaderPinwheel } from "lucide-react";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
 
 export const AgreementForm = () => {
-
+    const studentSigRef = useRef<SignaturePadRef>(null);
+    const supervisorSigRef = useRef<SignaturePadRef>(null);
     const form = useForm<AgreementFormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -37,10 +40,14 @@ export const AgreementForm = () => {
            supervisorAgreement: false
         },
     });
-
+    const clearSignature = () => {
+        studentSigRef.current?.clear();
+        supervisorSigRef.current?.clear();  
+    }
+    const { onSubmit } = useAgreement(form, clearSignature)
     return (
         <Form {...form}>
-            <form className="mt-10" onSubmit={form.handleSubmit((values) => console.log(values))}>
+            <form className="mt-10" onSubmit={form.handleSubmit(onSubmit)}>
                 <div className="space-y-8 mb-3.5">
                     <FormField
                         control={form.control}
@@ -298,7 +305,7 @@ export const AgreementForm = () => {
                         <FormItem>
                             <FormLabel>Student Signature:</FormLabel>
                             <FormControl>
-                                <SignaturePad name="studentSignature" />
+                                <SignaturePad ref={studentSigRef} name="studentSignature" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -311,7 +318,7 @@ export const AgreementForm = () => {
                         <FormItem>
                             <FormLabel>Supervisor Signature:</FormLabel>
                             <FormControl>
-                                <SignaturePad name="supervisorSignature" />
+                                <SignaturePad ref={supervisorSigRef} name="supervisorSignature" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
