@@ -1,5 +1,7 @@
 import { AgreementFormData, formSchema } from "@/app/services/agreement"
+import { auth } from "@/app/services/google"
 import { ErrorTypes } from "@/app/types/response"
+import { Auth, google } from "googleapis"
 import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
@@ -12,7 +14,49 @@ export async function POST(request: Request) {
     // Use Zod to validate the received data against the UserSchema
     const result = formSchema.safeParse(parsedBody)
     if(result.success) {
+        const values = [
+            [
+                parsedBody.name,
+                parsedBody.supervisorName,
+                parsedBody.title,
+                parsedBody.email,
+                parsedBody.phone,
+                parsedBody.organization,
+                parsedBody.address,
+                parsedBody.city,
+                parsedBody.state,
+                parsedBody.nation,
+                parsedBody.zipCode,
+                parsedBody.startDate.toISOString(),
+                parsedBody.endDate.toISOString(),
+                "checked",
+                "checked",
+                parsedBody.studentSignature,
+                parsedBody.supervisorSignature
+            ]
+        ]
+        try {
+            const client = await auth.getClient()
+            const googleSheets = google.sheets({ version: "v4", auth: client as Auth.OAuth2Client })
+            const id = process.env.SHEET_ID
+           
+            await googleSheets.spreadsheets.values.append({
+                auth,
+                range: `${process.env.SHEET_AGREEMENT_NAME}!A1:B2`,
+                spreadsheetId: id,
+                valueInputOption: "USER_ENTERED",
+                insertDataOption: "INSERT_ROWS",
+                requestBody: {
+                    values
+                }
+            })
+        } catch{
             return NextResponse.json(
+                { success: false, type: ErrorTypes.INTEGRATION_ERROR, errors: "Failed to submit data to Google Sheets. Please try again later." },
+                { status: 500 }
+            );
+        }
+        return NextResponse.json(
             { success: true },
             { status: 200 }
         )
