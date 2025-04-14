@@ -40,7 +40,41 @@ export const useAgreement = ( form : UseFormReturn<AgreementFormData>, onSuccess
         }
     }
 
+    const generateLink = async (values: AgreementFormData) => {
+        try {
+            const response = await fetch("/api/agreement", {
+                method: 'POST',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
+            })
+            const content: Response = await response.json()
+            console.log(content)
+            if(!content.success) {
+                if(content.type === ErrorTypes.INTEGRATION_ERROR) {
+                    toast.error(content.errors as string)
+                }
+                if(content.type === ErrorTypes.SCHEMA_VALIDATION) {
+                    const errors = content.errors as Record<string, string>
+                    Object.entries(errors).forEach(([key, value]) => {
+                        form.setError(key as keyof AgreementFormData, { type: "manual", message: value }); // Set error for each field
+                    })
+                }
+            } else {
+               
+                toast.success("generated!")
+              
+            }
+            
+        } catch(e) {
+            console.log('catch', e)
+        }
+    }
+
     return {
-        onSubmit
+        onSubmit,
+        generateLink
     }
 }
