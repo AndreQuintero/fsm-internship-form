@@ -2,6 +2,7 @@
 import { useAgreement } from "@/app/hooks/useAgreement";
 import { AgreementFormData, formSchema, studentTermsAndConditions, supervisorTermsAndConditions } from "@/app/services/agreement";
 import { disableDaysBeforeToday } from "@/app/services/application";
+import { GenerateLink } from "@/components/layout/agreement/generate-link";
 import { TermsAndConditions } from "@/components/layout/agreement/terms-conditions";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -45,6 +46,7 @@ export const AgreementForm = () => {
         supervisorSigRef.current?.clear();  
     }
     const { onSubmit } = useAgreement(form, clearSignature)
+
     return (
         <Form {...form}>
             <form className="mt-10" onSubmit={form.handleSubmit(onSubmit)}>
@@ -327,13 +329,18 @@ export const AgreementForm = () => {
                     
                     
                 </div>
-                <Button className="w-full lg:w-fit" disabled={form.formState.isSubmitting} type="submit">{form.formState.isSubmitting ? (
-                    <div className="flex items-center gap-2">
-                        <LoaderPinwheel className="animate-spin h-4 w-4" />
-                        <span>Submitting...</span>
-                    </div>
-                ) : "Submit" }</Button>
+                <div className="flex gap-4 flex-wrap justify-center lg:justify-normal">
+                    <Button className="w-full lg:w-fit" disabled={form.formState.isSubmitting} type="submit">{form.formState.isSubmitting ? (
+                        <div className="flex items-center gap-2">
+                            <LoaderPinwheel className="animate-spin h-4 w-4" />
+                            <span>Submitting...</span>
+                        </div>
+                    ) : "Submit" }</Button>
+                    <span className="lg:mt-1">Or</span>
+                    <GenerateLink form={form}/>
+                    
+                </div>
             </form>
-        </Form>
+        </Form> 
     )
 }
