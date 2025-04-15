@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const id = uuidv4()
 
     return NextResponse.json(
-        { success: true, link: id, body },
+        { success: true, link: id },
         { status: 200 }
     )
 }
