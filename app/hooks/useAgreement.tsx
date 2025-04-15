@@ -3,6 +3,8 @@ import { AgreementFormData } from "../services/agreement"
 import { ErrorTypes, Response } from "../types/response"
 import { toast } from "sonner"
 
+export type LinkGenerated =  Response & {link: string}
+
 export const useAgreement = ( form : UseFormReturn<AgreementFormData>, onSuccess?: () => void) => {
         
     const onSubmit = async (values: AgreementFormData) => {
@@ -50,24 +52,8 @@ export const useAgreement = ( form : UseFormReturn<AgreementFormData>, onSuccess
                 },
                 body: JSON.stringify(values)
             })
-            const content: Response = await response.json()
-            console.log(content)
-            if(!content.success) {
-                if(content.type === ErrorTypes.INTEGRATION_ERROR) {
-                    toast.error(content.errors as string)
-                }
-                if(content.type === ErrorTypes.SCHEMA_VALIDATION) {
-                    const errors = content.errors as Record<string, string>
-                    Object.entries(errors).forEach(([key, value]) => {
-                        form.setError(key as keyof AgreementFormData, { type: "manual", message: value }); // Set error for each field
-                    })
-                }
-            } else {
-               
-                toast.success("generated!")
-              
-            }
-            
+            const content: LinkGenerated = await response.json()
+            return content
         } catch(e) {
             console.log('catch', e)
         }
