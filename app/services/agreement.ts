@@ -74,3 +74,10 @@ export const supervisorTermsAndConditions: Omit<AgreementTermsCardProps, 'childr
         "Complete the midterm and final evaluation of the student."
     ]
 }
+
+export enum AgreementFormStatus {
+    VALID = "VALID",
+    EXPIRED = "EXPIRED",
+    INVALID = "INVALID",
+    SUBMITTED = "SUBMITTED"
+}
