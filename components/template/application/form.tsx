@@ -2,7 +2,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Accordion } from "@/components/ui/accordion";
 import { StudentsInformation } from "@/components/layout/application/students";
@@ -11,7 +10,7 @@ import { SupervisorInformation } from "@/components/layout/application/superviso
 import { ScheduleInformation } from "@/components/layout/application/schedule";
 import { AccordionForms, ApplicationFormData, formSchema } from "@/app/services/application";
 import { useApplication } from "@/app/hooks/useApplication";
-import { LoaderPinwheel } from "lucide-react";
+import { ButtonWithLoading } from "@/components/ui/buttonWithLoading";
 
 
 export const ApplicationForm = () => {
@@ -99,12 +98,7 @@ export const ApplicationForm = () => {
                 <SupervisorInformation form={form}/>
                 <ScheduleInformation form={form}/>
               </Accordion>
-              <Button className="w-full lg:w-fit" disabled={isSubmitting} type="submit">{isSubmitting ? (
-                 <div className="flex items-center gap-2">
-                 <LoaderPinwheel className="animate-spin h-4 w-4" />
-                 <span>Submitting...</span>
-               </div>
-              ) : "Submit" }</Button>
+              <ButtonWithLoading disabled={isSubmitting} type="submit" isLoading={isSubmitting} loadingText="Submitting..." text="Submit"/>
             </form>
         </Form>
       )

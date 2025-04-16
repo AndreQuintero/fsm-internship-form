@@ -5,6 +5,7 @@ import { disableDaysBeforeToday } from "@/app/services/application";
 import { GenerateLink } from "@/components/layout/agreement/generate-link";
 import { TermsAndConditions } from "@/components/layout/agreement/terms-conditions";
 import { Button } from "@/components/ui/button";
+import { ButtonWithLoading } from "@/components/ui/buttonWithLoading";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DatePicker } from "@/components/ui/date-picker";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -13,7 +14,7 @@ import { SignaturePad, SignaturePadRef } from "@/components/ui/signature-pad";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { CalendarIcon, LoaderPinwheel } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
@@ -330,12 +331,7 @@ export const AgreementForm = () => {
                     
                 </div>
                 <div className="flex gap-4 flex-wrap justify-center lg:justify-normal">
-                    <Button className="w-full lg:w-fit" disabled={form.formState.isSubmitting} type="submit">{form.formState.isSubmitting ? (
-                        <div className="flex items-center gap-2">
-                            <LoaderPinwheel className="animate-spin h-4 w-4" />
-                            <span>Submitting...</span>
-                        </div>
-                    ) : "Submit" }</Button>
+                    <ButtonWithLoading disabled={form.formState.isSubmitting} type="submit" isLoading={form.formState.isSubmitting} loadingText="Submitting..." text="Submit"/>
                     <span className="lg:mt-1">Or</span>
                     <GenerateLink form={form}/>
                     
