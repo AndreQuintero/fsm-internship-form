@@ -14,6 +14,7 @@ export async function POST(request: Request) {
     // Use Zod to validate the received data against the UserSchema
     const result = formSchema.safeParse(parsedBody)
     if(result.success) {
+        const AGREEMENT = "Yes, I Agree."
         const values = [
             [
                 parsedBody.name,
@@ -29,8 +30,8 @@ export async function POST(request: Request) {
                 parsedBody.zipCode,
                 parsedBody.startDate.toISOString(),
                 parsedBody.endDate.toISOString(),
-                "checked",
-                "checked",
+                AGREEMENT,
+                AGREEMENT,
                 parsedBody.studentSignature,
                 parsedBody.supervisorSignature
             ]
