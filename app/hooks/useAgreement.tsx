@@ -2,14 +2,15 @@ import { UseFormReturn } from "react-hook-form"
 import { AgreementFormData } from "../services/agreement"
 import { ErrorTypes, Response } from "../types/response"
 import { toast } from "sonner"
+import { setUrl } from "../services/hash"
 
 export type LinkGenerated =  Response & {link: string}
 
-export const useAgreement = ( form : UseFormReturn<AgreementFormData>, onSuccess?: () => void) => {
+export const useAgreement = ( form : UseFormReturn<AgreementFormData>, onSuccess?: () => void, hash_id?: string) => {
         
     const onSubmit = async (values: AgreementFormData) => {
         try {
-            const response = await fetch("/api/agreement/submit", {
+            const response = await fetch(setUrl("/api/agreement/submit", hash_id), {
                 method: 'POST',
                 headers: {
                 'Accept': 'application/json',
