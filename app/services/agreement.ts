@@ -81,3 +81,23 @@ export enum AgreementFormStatus {
     INVALID = "INVALID",
     SUBMITTED = "SUBMITTED"
 }
+
+export const DEFAULT_VALUES = {
+    name: "",
+    supervisorName: "",
+    title:"",
+    email: "",
+    phone: "",
+    organization: "",
+    address: "",
+    city: "",
+    state: "",
+    nation: "",
+    zipCode: "",
+    startDate: undefined,
+    endDate: undefined,
+    studentAgreement: false,
+    supervisorAgreement: false,
+    studentSignature: "",
+    supervisorSignature: ""
+} as const
