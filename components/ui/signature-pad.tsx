@@ -15,52 +15,61 @@ export const SignaturePad = forwardRef<SignaturePadRef, SignaturePadType>(({ nam
     const sigCanvas = useRef<SignatureCanvas>(null)
     const { setValue, watch } = useFormContext()
     const [isInitialized, setIsInitialized] = useState(false)
+    const signatureData = watch(name)
 
     const handleClear = () => {
         sigCanvas.current?.clear();
-        setValue(name, "", { shouldValidate: true });
+        setValue(name, "", { shouldValidate: true })
     }
 
     const handleEnd = () => {
         if (sigCanvas.current) {
         const signatureData = sigCanvas.current.toDataURL("image/png");
-        setValue(name, signatureData, { shouldValidate: true });
+        setValue(name, signatureData, { shouldValidate: true })
         }
     }
+
+    // Initialize with empty value
+    useEffect(() => {
+      if (!isInitialized && !signatureData) {
+          setValue(name, "", { shouldValidate: false })
+          setIsInitialized(true)
+      }
+    }, [name, setValue, isInitialized, signatureData])
+    
+
+    // Load existing signature when component mounts or when signatureData changes
+    useEffect(() => {
+      if (sigCanvas.current && signatureData) {
+          sigCanvas.current.fromDataURL(signatureData)
+      }
+    }, [signatureData])
 
     // Save signature on resize
     useEffect(() => {
       const handleResize = () => {
           if (sigCanvas.current && watch(name)) {
               // Temporarily store the signature
-              const signatureData = watch(name);
+              const signatureData = watch(name)
               
               // Clear and resize
-              sigCanvas.current.clear();
+              sigCanvas.current.clear()
               
               // Wait for the next tick to redraw
               setTimeout(() => {
                   if (signatureData && sigCanvas.current) {
-                      sigCanvas.current.fromDataURL(signatureData);
+                      sigCanvas.current.fromDataURL(signatureData)
                   }
-              }, 100);
+              }, 100)
           }
-      };
+      }
 
-      window.addEventListener('resize', handleResize);
+      window.addEventListener('resize', handleResize)
       
       return () => {
-          window.removeEventListener('resize', handleResize);
+          window.removeEventListener('resize', handleResize)
       };
-  }, [watch, name]);
-
-  // Initialize with empty value
-  useEffect(() => {
-      if (!isInitialized) {
-          setValue(name, "", { shouldValidate: false });
-          setIsInitialized(true);
-      }
-  }, [name, setValue, isInitialized]);
+  }, [watch, name])
 
   useImperativeHandle(ref, () => ({
     clear: () => {
