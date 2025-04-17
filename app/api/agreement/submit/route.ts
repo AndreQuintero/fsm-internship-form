@@ -1,10 +1,15 @@
 import { AgreementFormData, formSchema } from "@/app/services/agreement"
+import { updateFormSubmitted } from "@/app/services/db/agreement"
 import { auth } from "@/app/services/google"
 import { ErrorTypes } from "@/app/types/response"
 import { Auth, google } from "googleapis"
 import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
+    // Get the query parameters from the URL
+    const url = new URL(request.url)
+    const hashId = url.searchParams.get('hash_id')
+
     const body = (await request.json()) as AgreementFormData
     const parsedBody: AgreementFormData = {
         ...body,
@@ -56,6 +61,16 @@ export async function POST(request: Request) {
                 { success: false, type: ErrorTypes.INTEGRATION_ERROR, errors: "Failed to submit data to Google Sheets. Please try again later." },
                 { status: 500 }
             );
+        }
+
+        // UPDATE DB IF REGISTERS EXISTS 
+        try {
+            if(hashId) {
+                await updateFormSubmitted(hashId, parsedBody) 
+            }
+        } catch(e) {
+            // It doesn't matter if it doesn't save, because it submitted already
+            console.log(e)
         }
         return NextResponse.json(
             { success: true },
