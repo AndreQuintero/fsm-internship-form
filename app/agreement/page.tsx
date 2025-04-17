@@ -13,7 +13,7 @@ const fetchAgreementData = async (hash_id?: string) => {
 } 
 
 type AgreementPageProps = {
-  searchParams: { hash_id?: string }
+  searchParams: Promise<{ hash_id?: string }>
 }
 
 export default async function Agreement({ searchParams }: AgreementPageProps) {
