@@ -1,4 +1,4 @@
-import { ApplicationFormData, formSchema } from "@/app/services/application";
+import { ApplicationFormData, formSchema } from "@/app/services/application-form";
 
 import { auth } from "@/app/services/google";
 import { ErrorTypes } from "@/app/types/response";
