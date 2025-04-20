@@ -1,4 +1,4 @@
-import { FormAgreementProps } from "@/app/services/agreement";
+import { FormAgreementProps } from "@/app/services/agreement-form";
 import { disableDaysBeforeToday } from "@/app/services/date";
 import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/ui/date-picker";

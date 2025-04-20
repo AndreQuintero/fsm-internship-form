@@ -1,4 +1,4 @@
-import { FormAgreementProps } from "@/app/services/agreement"
+import { FormAgreementProps } from "@/app/services/agreement-form"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { SignaturePad, SignaturePadRef } from "@/components/ui/signature-pad"
 import { RefObject } from "react"
