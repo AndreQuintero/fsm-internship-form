@@ -1,4 +1,4 @@
-import { AccordionForms, FormApplicationProps } from "@/app/services/application";
+import { AccordionForms, FormApplicationProps } from "@/app/services/application-form";
 import { AccordionTrigger, AccordionItem, AccordionContent } from "@/components/ui/accordion";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";

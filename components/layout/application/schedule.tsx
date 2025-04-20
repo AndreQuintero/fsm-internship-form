@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { AccordionForms, FormApplicationProps } from "@/app/services/application";
+import { AccordionForms, FormApplicationProps } from "@/app/services/application-form";
 import { DatePicker } from "@/components/ui/date-picker";
 import { disableDaysBeforeToday } from "@/app/services/date";
 

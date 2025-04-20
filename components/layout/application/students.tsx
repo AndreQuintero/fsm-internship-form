@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AccordionForms, FormApplicationProps } from "@/app/services/application";
+import { AccordionForms, FormApplicationProps } from "@/app/services/application-form";
 import { DatePicker } from "@/components/ui/date-picker";
 
 
