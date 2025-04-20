@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 export const useApplication = ( form : UseFormReturn<ApplicationFormData>) => {
 
-    const { validate, success } = useValidation<ApplicationFormData>(form)
+    const { handleFormResponse } = useValidation<ApplicationFormData>(form)
     
     const onSubmitError = async () => {
            await form.trigger()
@@ -17,12 +17,7 @@ export const useApplication = ( form : UseFormReturn<ApplicationFormData>) => {
         try {
             const response = await submitRequest(values)
             const content: Response = await response.json()
-            if(!content.success) {
-               validate(content)
-            } else {
-               success()
-            }
-            
+            handleFormResponse(content)
         } catch(e) {
             toast.error("Something went wrong, try again later.")
             console.log('catch', e)

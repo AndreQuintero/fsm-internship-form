@@ -9,21 +9,16 @@ export type LinkGenerated =  Response & {link: string}
 
 export const useAgreement = ( form : UseFormReturn<AgreementFormData>, onSuccess?: () => void, hash_id?: string) => {
     
-    const { validate, success } = useValidation<AgreementFormData>(form)
+    const { handleFormResponse } = useValidation<AgreementFormData>(form, {
+        defaultValues: DEFAULT_VALUES,
+        onSuccess
+    })
     
     const onSubmit = async (values: AgreementFormData) => {
         try {
             const response = await submitRequest(values, hash_id)
             const content: Response = await response.json()
-            if(!content.success) {
-                validate(content)
-            } else {
-                success(DEFAULT_VALUES)
-                if(onSuccess) {
-                    onSuccess()
-                }
-            }
-            
+            handleFormResponse(content)
         } catch(e) {
             console.log('catch', e)
         }
