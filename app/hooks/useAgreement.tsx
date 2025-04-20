@@ -1,38 +1,24 @@
 import { UseFormReturn } from "react-hook-form"
-import { AgreementFormData } from "../services/agreement"
-import { ErrorTypes, Response } from "../types/response"
+import { AgreementFormData, DEFAULT_VALUES } from "../services/agreement-form"
+import { Response } from "../types/response"
+import { useValidation } from "./useValidation"
+import { generateLinkRequest, submitRequest } from "../services/agreement"
 import { toast } from "sonner"
-import { setUrl } from "../services/hash"
 
 export type LinkGenerated =  Response & {link: string}
 
 export const useAgreement = ( form : UseFormReturn<AgreementFormData>, onSuccess?: () => void, hash_id?: string) => {
-        
+    
+    const { validate, success } = useValidation<AgreementFormData>(form)
+    
     const onSubmit = async (values: AgreementFormData) => {
         try {
-            const response = await fetch(setUrl("/api/agreement/submit", hash_id), {
-                method: 'POST',
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(values)
-            })
+            const response = await submitRequest(values, hash_id)
             const content: Response = await response.json()
-            console.log(content)
             if(!content.success) {
-                if(content.type === ErrorTypes.INTEGRATION_ERROR) {
-                    toast.error(content.errors as string)
-                }
-                if(content.type === ErrorTypes.SCHEMA_VALIDATION) {
-                    const errors = content.errors as Record<string, string>
-                    Object.entries(errors).forEach(([key, value]) => {
-                        form.setError(key as keyof AgreementFormData, { type: "manual", message: value }); // Set error for each field
-                    })
-                }
+                validate(content)
             } else {
-                form.reset()
-                toast.success("The form has been submitted successfully!")
+                success(DEFAULT_VALUES)
                 if(onSuccess) {
                     onSuccess()
                 }
@@ -45,17 +31,11 @@ export const useAgreement = ( form : UseFormReturn<AgreementFormData>, onSuccess
 
     const generateLink = async (values: AgreementFormData) => {
         try {
-            const response = await fetch("/api/agreement", {
-                method: 'POST',
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(values)
-            })
+            const response = await generateLinkRequest(values)
             const content: LinkGenerated = await response.json()
             return content
         } catch(e) {
+            toast.error("Something went wrong, try again later.")
             console.log('catch', e)
         }
     }
