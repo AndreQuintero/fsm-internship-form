@@ -1,6 +1,6 @@
 'use client'
 import { useAgreement } from "@/app/hooks/useAgreement";
-import { AgreementFormData, DEFAULT_VALUES, formSchema } from "@/app/services/agreement";
+import { AgreementFormData, DEFAULT_VALUES, formSchema } from "@/app/services/agreement-form";
 import { AgreementData, convertAgreementDbDataToAgreementForm } from "@/app/services/db/agreement";
 import { Address } from "@/components/layout/agreement/address";
 import { GenerateLink } from "@/components/layout/agreement/generate-link";
@@ -31,10 +31,11 @@ export const AgreementForm = ({ data }: AgreementFormProps) => {
     }
     
     const form = useForm<AgreementFormData>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(formSchema),      
         defaultValues: {
             ...getRetrievedData()
         },
+        mode: "all"
     });
     const clearSignature = () => {
         studentSigRef.current?.clear();

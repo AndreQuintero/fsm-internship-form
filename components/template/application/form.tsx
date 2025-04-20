@@ -8,7 +8,7 @@ import { StudentsInformation } from "@/components/layout/application/students";
 import { WorksiteInformation } from "@/components/layout/application/worksite";
 import { SupervisorInformation } from "@/components/layout/application/supervisor";
 import { ScheduleInformation } from "@/components/layout/application/schedule";
-import { AccordionForms, ApplicationFormData, formSchema } from "@/app/services/application";
+import { AccordionForms, ApplicationFormData, formSchema } from "@/app/services/application-form";
 import { useApplication } from "@/app/hooks/useApplication";
 import { ButtonWithLoading } from "@/components/ui/buttonWithLoading";
 
@@ -39,6 +39,7 @@ export const ApplicationForm = () => {
           endDate: undefined,
           jobDescription: ""
         },
+        mode: "all"
       });
       const { onSubmit, onSubmitError } = useApplication(form)
       const { errors, isSubmitting } = form.formState
