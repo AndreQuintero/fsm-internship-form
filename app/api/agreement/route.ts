@@ -1,5 +1,5 @@
  
-import { AgreementFormData } from "@/app/services/agreement"
+import { AgreementFormData } from "@/app/services/agreement-form"
 import { NextResponse } from "next/server"
 import { v4 as uuidv4 } from 'uuid'
 import { insertAgreement } from "@/app/services/db/agreement";
