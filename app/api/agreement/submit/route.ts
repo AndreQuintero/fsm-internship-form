@@ -1,4 +1,4 @@
-import { AgreementFormData, formSchema } from "@/app/services/agreement"
+import { AgreementFormData, formSchema } from "@/app/services/agreement-form"
 import { updateFormSubmitted } from "@/app/services/db/agreement"
 import { auth } from "@/app/services/google"
 import { ErrorTypes } from "@/app/types/response"
