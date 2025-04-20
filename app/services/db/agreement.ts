@@ -1,5 +1,5 @@
 import { neon } from "@neondatabase/serverless"
-import { AgreementFormData, AgreementFormStatus } from "../agreement"
+import { AgreementFormData, AgreementFormStatus } from "../agreement-form"
 import { convertDateToIsoString } from "../date"
 
 export type AgreementData = {
