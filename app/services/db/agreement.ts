@@ -1,6 +1,7 @@
 import { neon } from "@neondatabase/serverless"
-import { AgreementFormData, AgreementFormStatus } from "../agreement-form"
+import { AgreementFormData } from "../agreement-form"
 import { convertDateToIsoString } from "../date"
+import { FormStatus } from "../form"
 
 export type AgreementData = {
     id: number,
@@ -22,7 +23,7 @@ export type AgreementData = {
     supervisor_agreement: boolean,
     student_signature: string,
     supervisor_signature: string,
-    form_status: AgreementFormStatus,
+    form_status: FormStatus,
     created_at: string,
     updated_at: string
 }
@@ -74,7 +75,7 @@ export const insertAgreement = async (hash_id: string, body: AgreementFormData) 
         ${body.supervisorAgreement}, 
         ${body.studentSignature}, 
         ${body.supervisorSignature}, 
-        ${AgreementFormStatus.VALID}, 
+        ${FormStatus.VALID}, 
         NOW(), 
         NOW()
     )`
@@ -91,9 +92,9 @@ export const convertAgreementDbDataToAgreementForm = (data: AgreementData): Agre
     return {
         ...data,
         supervisorName: data.supervisor_name,
-        startDate: data.start_date,
+        startDate: data.start_date ?? undefined,
         zipCode: data.zip_code,
-        endDate: data.end_date,
+        endDate: data.end_date ?? undefined,
         studentAgreement: data.student_agreement,
         supervisorAgreement: data.supervisor_agreement,
         studentSignature: data.student_signature,
@@ -102,7 +103,7 @@ export const convertAgreementDbDataToAgreementForm = (data: AgreementData): Agre
 }
 
 
-const updateFormStatus = async (status: AgreementFormStatus, hash_id: string, body: AgreementFormData) => {
+const updateFormStatus = async (status: FormStatus, hash_id: string, body: AgreementFormData) => {
     const sql = getConnection()
     await sql`UPDATE agreement set 
         name = ${body.name}, 
@@ -128,5 +129,5 @@ const updateFormStatus = async (status: AgreementFormStatus, hash_id: string, bo
 }
 
 export const updateFormSubmitted = async (hash_id: string, body: AgreementFormData) => {
-    await updateFormStatus(AgreementFormStatus.SUBMITTED, hash_id, body)
+    await updateFormStatus(FormStatus.SUBMITTED, hash_id, body)
 }
