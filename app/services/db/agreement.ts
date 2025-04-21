@@ -131,3 +131,7 @@ const updateFormStatus = async (status: FormStatus, hash_id: string, body: Agree
 export const updateFormSubmitted = async (hash_id: string, body: AgreementFormData) => {
     await updateFormStatus(FormStatus.SUBMITTED, hash_id, body)
 }
+
+export const updateFormExpired = async (hash_id: string, body: AgreementFormData) => {
+    await updateFormStatus(FormStatus.EXPIRED, hash_id, body)
+}
