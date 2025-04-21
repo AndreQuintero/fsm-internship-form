@@ -75,13 +75,6 @@ export const supervisorTermsAndConditions: Omit<AgreementTermsCardProps, 'childr
     ]
 }
 
-export enum AgreementFormStatus {
-    VALID = "VALID",
-    EXPIRED = "EXPIRED",
-    INVALID = "INVALID",
-    SUBMITTED = "SUBMITTED"
-}
-
 export const DEFAULT_VALUES = {
     name: "",
     supervisorName: "",
