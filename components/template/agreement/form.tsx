@@ -15,15 +15,15 @@ import { SignaturePadRef } from "@/components/ui/signature-pad";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
+import { WithValidation } from "../withValidation";
 
 
 type AgreementFormProps = {
     data: AgreementData | null
 }
 
-export const AgreementForm = ({ data }: AgreementFormProps) => {
+const FormComponent = ({ data }: AgreementFormProps) => {
 
-    //TODO: MAKE A PARENT COMPONENT THAT HANDLES THE FORM STATUS, IF IT'S NOT VALID, REDIRECT TO /agreement AND TOAST THE ERRORS
     const studentSigRef = useRef<SignaturePadRef>(null);
     const supervisorSigRef = useRef<SignaturePadRef>(null);
     const getRetrievedData = () => {
@@ -64,3 +64,5 @@ export const AgreementForm = ({ data }: AgreementFormProps) => {
         </Form> 
     )
 }
+
+export const AgreementForm = WithValidation(FormComponent)
