@@ -1,3 +1,4 @@
+import { convertHoursToDays } from "@/app/services/date"
 import { ButtonWithLoading } from "@/components/ui/buttonWithLoading"
 import { List } from "@/components/ui/list"
 
@@ -11,7 +12,7 @@ export const MessageModal = ({ createLink, isLoading }: MessageModalProps) => {
         "Save the form for you to be able to fill all the information.",
         "You can share the link with your supervisor for them to be able to sign the form.",
         "Submit the form with both signatures.",
-        "The link will expire in 24 hours."
+        `The link will expire in ${convertHoursToDays(Number(process.env.NEXT_PUBLIC_EXPIRATION_TIME!))} day(s).`
     ]
     return (
     <>
