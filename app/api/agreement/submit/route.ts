@@ -58,7 +58,7 @@ export async function POST(request: Request) {
             })
         } catch{
             return NextResponse.json(
-                { success: false, type: ErrorTypes.INTEGRATION_ERROR, errors: "Failed to submit data to Google Sheets. Please try again later." },
+                { success: false, type: ErrorTypes.SERVER_ERROR, errors: "Failed to submit data to Google Sheets. Please try again later." },
                 { status: 500 }
             );
         }
