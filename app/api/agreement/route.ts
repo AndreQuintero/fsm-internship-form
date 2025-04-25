@@ -2,7 +2,8 @@
 import { AgreementFormData } from "@/app/services/agreement-form"
 import { NextResponse } from "next/server"
 import { v4 as uuidv4 } from 'uuid'
-import { insertAgreement } from "@/app/services/db/agreement";
+import { insertAgreement, updateForm } from "@/app/services/db/agreement";
+import { ErrorTypes } from "@/app/types/response";
 
 
 export async function POST(request: Request) {
@@ -13,6 +14,29 @@ export async function POST(request: Request) {
         const link = generateLink(id, request)
         return NextResponse.json(
             { success: true, link },
+            { status: 200 }
+        )
+    } catch (e) {
+        console.log(e)
+        return NextResponse.json(
+            { success: false },
+            { status: 500 }
+        )
+    }
+}
+
+export async function PUT(request: Request) {
+    const url = new URL(request.url)
+    const hashId = url.searchParams.get('hash_id')
+    if(!hashId) return NextResponse.json(
+        { success: false, type: ErrorTypes.SERVER_ERROR, errors: "Form ID is required." },
+        { status: 500 }
+    )
+    const body = (await request.json()) as AgreementFormData
+    try {
+        await updateForm(hashId, body)
+        return NextResponse.json(
+            { success: true, body },
             { status: 200 }
         )
     } catch (e) {
