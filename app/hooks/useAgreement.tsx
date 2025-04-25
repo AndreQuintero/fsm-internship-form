@@ -2,7 +2,7 @@ import { UseFormReturn } from "react-hook-form"
 import { AgreementFormData, DEFAULT_VALUES } from "../services/agreement-form"
 import { Response } from "../types/response"
 import { useValidation } from "./useValidation"
-import { generateLinkRequest, submitRequest } from "../services/agreement"
+import { generateLinkRequest, submitRequest, updateForm } from "../services/agreement"
 import { toast } from "sonner"
 
 export type LinkGenerated =  Response & {link: string}
@@ -35,8 +35,20 @@ export const useAgreement = ( form : UseFormReturn<AgreementFormData>, onSuccess
         }
     }
 
+    const update = async(values: AgreementFormData) => {
+        try {
+            const response = await updateForm(values, hash_id!)
+            const content: Response = await response.json()
+            handleFormResponse(content, "The form has been updated successfully!", false)
+        } catch(e) {
+            toast.error("Something went wrong, try again later.")
+            console.log('catch', e)
+        }
+    }
+
     return {
         onSubmit,
-        generateLink
+        generateLink,
+        update
     }
 }
