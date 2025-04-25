@@ -22,6 +22,7 @@ export async function POST(request: Request) {
         const AGREEMENT = "Yes, I Agree."
         const values = [
             [
+                new Date().toISOString(),
                 parsedBody.name,
                 parsedBody.supervisorName,
                 parsedBody.title,

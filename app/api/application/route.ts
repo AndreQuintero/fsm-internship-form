@@ -20,6 +20,7 @@ export async function POST(request: Request) {
     if (result.success) {
         const values = [
             [
+                new Date().toISOString(),
                 parsedBody.name,
                 parsedBody.birthDate.toISOString(),
                 parsedBody.email,
