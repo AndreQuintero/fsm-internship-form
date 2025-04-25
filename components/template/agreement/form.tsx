@@ -8,7 +8,6 @@ import { InternshipDate } from "@/components/layout/agreement/internship-date";
 import { PersonalInfo } from "@/components/layout/agreement/personal-info";
 import { Signatures } from "@/components/layout/agreement/signatures";
 import { TermsSection } from "@/components/layout/agreement/terms-conditions-section";
-import { buttonVariants } from "@/components/ui/button";
 import { ButtonWithLoading } from "@/components/ui/buttonWithLoading";
 import { Form } from "@/components/ui/form";
 import { SignaturePadRef } from "@/components/ui/signature-pad";
@@ -16,6 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { WithValidation } from "../withValidation";
+import { UpdateForm } from "@/components/layout/agreement/update-form";
 
 
 type AgreementFormProps = {
@@ -23,7 +23,6 @@ type AgreementFormProps = {
 }
 
 const FormComponent = ({ data }: AgreementFormProps) => {
-
     const studentSigRef = useRef<SignaturePadRef>(null);
     const supervisorSigRef = useRef<SignaturePadRef>(null);
     const getRetrievedData = () => {
@@ -42,7 +41,7 @@ const FormComponent = ({ data }: AgreementFormProps) => {
         supervisorSigRef.current?.clear();  
     }
     const { onSubmit } = useAgreement(form, clearSignature, data?.hash)
-
+    
     return (
         <Form {...form}>
             <form className="mt-10" onSubmit={form.handleSubmit(onSubmit)}>
@@ -56,9 +55,7 @@ const FormComponent = ({ data }: AgreementFormProps) => {
                 <div className="flex gap-4 flex-wrap justify-center lg:justify-normal">
                     <ButtonWithLoading disabled={form.formState.isSubmitting} type="submit" isLoading={form.formState.isSubmitting} loadingText="Submitting..." text="Submit"/>
                     <span className="lg:mt-1">Or</span>
-                    {!data ? <GenerateLink form={form}/> : 
-                    <ButtonWithLoading className={`w-full lg:w-fit ${buttonVariants({ variant: 'secondary' })}`} type="button" isLoading={form.formState.isSubmitting} loadingText="Updating..." text="Update"/>
-                    }       
+                    {!data ? <GenerateLink form={form}/> : <UpdateForm form={form} hash_id={data.hash}/> }       
                 </div>
             </form>
         </Form> 
