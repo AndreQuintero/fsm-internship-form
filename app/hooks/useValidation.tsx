@@ -3,8 +3,8 @@ import { ErrorTypes, Response } from "../types/response";
 import { toast } from "sonner";
 
 export const useValidation = <T extends FieldValues>(form : UseFormReturn<T>, options?: {
-    onSuccess?: () => void;
-    defaultValues?: DefaultValues<T>;
+    onSuccess?: () => void
+    defaultValues?: DefaultValues<T>
   }) => {
     const handleSchemaValidation = (response: Response) => {
         const errors = response.errors as Record<string, string>
@@ -18,7 +18,7 @@ export const useValidation = <T extends FieldValues>(form : UseFormReturn<T>, op
     }
 
     const validate = (response: Response) => {
-        if(response.type === ErrorTypes.INTEGRATION_ERROR) {
+        if(response.type === ErrorTypes.SERVER_ERROR) {
             handleIntegrationValidation(response)
         }
         if(response.type === ErrorTypes.SCHEMA_VALIDATION) {
@@ -26,18 +26,20 @@ export const useValidation = <T extends FieldValues>(form : UseFormReturn<T>, op
         }
     }
 
-    const handleSuccess = () => {
-        form.reset(options?.defaultValues ?? undefined)
-        toast.success("The form has been submitted successfully!")
+    const handleSuccess = (message?: string, resetForm?: boolean) => {
+        if(resetForm) {
+            form.reset(options?.defaultValues ?? undefined)
+        }
+        toast.success(message ?? "The form has been submitted successfully!")
         options?.onSuccess?.()
     }
 
-    const handleFormResponse = (response: Response) => {
+    const handleFormResponse = (response: Response, successText?: string, resetForm = true) => {
         if(!response.success) {
             validate(response)
             return
         }
-        handleSuccess()
+        handleSuccess(successText, resetForm)
     }
     return {
         handleFormResponse
