@@ -28,6 +28,18 @@ export const generateLinkRequest = async (values: AgreementFormData) => {
     return response
 }
 
+export const updateForm = async (values: AgreementFormData, hash_id: string) => {
+    const response = await fetch(setUrl("/api/agreement", hash_id), {
+        method: 'PUT',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+    })
+    return response
+}
+
 export const checkIfDateIsExpired = (createdAt: Date) => {
     const targetDate = addHoursToDate(createdAt, Number(process.env.EXPIRATION_TIME!))
     const currentDate = new Date()
