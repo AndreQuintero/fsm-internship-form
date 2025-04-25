@@ -6,5 +6,5 @@ export type Response<T = string | string[] | Record<string, string>> = {
 
 export enum ErrorTypes  {
     SCHEMA_VALIDATION = "SCHEMA_VALIDATION",
-    INTEGRATION_ERROR = "INTEGRATION_ERROR"
+    SERVER_ERROR = "SERVER_ERROR"
 }
