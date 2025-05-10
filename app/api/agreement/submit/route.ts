@@ -1,8 +1,8 @@
 import { AgreementFormData, formSchema } from "@/app/services/agreement-form"
 import { updateFormSubmitted } from "@/app/services/db/agreement"
-import { auth } from "@/app/services/google"
+import { sendEmail } from "@/app/services/email"
+import { insertDataIntoSheet } from "@/app/services/google-sheet"
 import { ErrorTypes } from "@/app/types/response"
-import { Auth, google } from "googleapis"
 import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
@@ -43,19 +43,9 @@ export async function POST(request: Request) {
             ]
         ]
         try {
-            const client = await auth.getClient()
-            const googleSheets = google.sheets({ version: "v4", auth: client as Auth.OAuth2Client })
-            const id = process.env.SHEET_ID
-           
-            await googleSheets.spreadsheets.values.append({
-                auth,
-                range: `${process.env.SHEET_AGREEMENT_NAME}!A1:B2`,
-                spreadsheetId: id,
-                valueInputOption: "USER_ENTERED",
-                insertDataOption: "INSERT_ROWS",
-                requestBody: {
-                    values
-                }
+            insertDataIntoSheet({
+                values,
+                sheetName: process.env.SHEET_AGREEMENT_NAME!
             })
         } catch{
             return NextResponse.json(
@@ -63,7 +53,7 @@ export async function POST(request: Request) {
                 { status: 500 }
             );
         }
-
+        
         // UPDATE DB IF REGISTERS EXISTS 
         try {
             if(hashId) {
@@ -73,6 +63,19 @@ export async function POST(request: Request) {
             // It doesn't matter if it doesn't save, because it submitted already
             console.log(e)
         }
+
+        try {
+            if(Boolean(process.env.EMAILJS_ENABLED)) {
+                sendEmail({
+                    name: parsedBody.name,
+                    title: "Internship Agreement Form",
+                    email: parsedBody.email
+                })
+            }
+        } catch(e) {
+            console.log("Error to send email" + e)
+        }
+
         return NextResponse.json(
             { success: true },
             { status: 200 }

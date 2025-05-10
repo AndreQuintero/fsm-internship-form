@@ -1,8 +1,8 @@
 import { ApplicationFormData, formSchema } from "@/app/services/application-form";
+import { sendEmail } from "@/app/services/email";
 
-import { auth } from "@/app/services/google";
+import { insertDataIntoSheet } from "@/app/services/google-sheet";
 import { ErrorTypes } from "@/app/types/response";
-import { google, Auth } from "googleapis";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -26,9 +26,7 @@ export async function POST(request: Request) {
                 parsedBody.email,
                 parsedBody.organizationName,
                 parsedBody.webpage,
-                parsedBody.streetLine1,
-                parsedBody.streetLine2,
-                parsedBody.streetLine3,
+                parsedBody.streetLine1.concat(' ').concat(parsedBody.streetLine2 ?? '').concat(' ').concat(parsedBody.streetLine3 ?? ''),
                 parsedBody.city,
                 parsedBody.state,
                 parsedBody.nation,
@@ -43,19 +41,9 @@ export async function POST(request: Request) {
             ]
         ]
         try {
-            const client = await auth.getClient()
-            const googleSheets = google.sheets({ version: "v4", auth: client as Auth.OAuth2Client })
-            const id = process.env.SHEET_ID
-           
-            await googleSheets.spreadsheets.values.append({
-                auth,
-                range: `${process.env.SHEET_APPLICATION_NAME}!A1:B2`,
-                spreadsheetId: id,
-                valueInputOption: "USER_ENTERED",
-                insertDataOption: "INSERT_ROWS",
-                requestBody: {
-                    values
-                }
+            insertDataIntoSheet({
+                sheetName: process.env.SHEET_APPLICATION_NAME!,
+                values
             })
         } catch{
             return NextResponse.json(
@@ -66,7 +54,11 @@ export async function POST(request: Request) {
 
         try {
             if(Boolean(process.env.EMAILJS_ENABLED)) {
-                await sendEmail(parsedBody)
+                await sendEmail({
+                    name: parsedBody.name, 
+                    title: "Form Internship Application", 
+                    email: parsedBody.email
+                })
             }    
         } catch(e) {
             console.log("Error to send email" + e)
@@ -84,27 +76,4 @@ export async function POST(request: Request) {
   
     // Respond with a JSON object containing the validation errors
     return NextResponse.json({ success: false, type: ErrorTypes.SCHEMA_VALIDATION, errors: serverErrors }, {status: 400})
-  }
-
-
-  const sendEmail = async (data: ApplicationFormData) => {
-    const params = {
-        service_id: process.env.EMAILJS_SERVICE_ID,
-        template_id: process.env.EMAILJS_TEMPLATE_ID,
-        user_id: process.env.EMAILJS_PUBLIC_KEY,
-        template_params: {
-            name: data.name,
-            title: "Form Internship Application",
-            email: data.email
-        },
-        accessToken: process.env.EMAILJS_PRIVATE_KEY
-    }
-    return await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method: 'POST',
-        headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(params)
-    })
   }
