@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { Menu } from "@/components/ui/menu";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 
 const outfit = Outfit({
@@ -25,10 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${outfit.variable} antialiased`}
-      >
-        <Menu />
+      <body className={`${outfit.variable} antialiased`}>
+        <SidebarProvider>
+          <Menu />
+        </SidebarProvider>
         {children}
         <Toaster />
       </body>
