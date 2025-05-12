@@ -18,8 +18,8 @@ export const MenuMobile = () => {
     }
     return(
         <>
-            <div className="flex w-full justify-end">
-                <SidebarTrigger>
+            <div className="p-2.5">
+                <SidebarTrigger className="h-[42px] w-[42px]">
                     <PanelRightOpen />
                 </SidebarTrigger>
             </div>
@@ -30,7 +30,7 @@ export const MenuMobile = () => {
                     </SidebarHeader>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            <SidebarMenuItem className="flex flex-col space-y-2.5">
+                            <SidebarMenuItem className="flex flex-col space-y-[20px]">
                                 <SidebarMenuButton asChild>
                                     <Link href="/" passHref legacyBehavior>
                                         <span className={`flex gap-2 cursor-pointer ${getActiveLinkClass("/")}`}> <PenLine /> Application</span>
