@@ -17,6 +17,9 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Fire School of Ministry Internship Form",
   description: "Fire School of Ministry Phillipines Internship Form",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
