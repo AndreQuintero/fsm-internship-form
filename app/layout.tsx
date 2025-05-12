@@ -4,7 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { Menu } from "@/components/ui/menu";
 import { SidebarProvider } from "@/components/ui/sidebar";
-
+import { Analytics } from '@vercel/analytics/next';
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -35,6 +35,7 @@ export default function RootLayout({
         </SidebarProvider>
         {children}
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
