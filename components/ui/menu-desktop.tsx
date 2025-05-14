@@ -17,7 +17,9 @@ export const MenuDesktop = () => {
                 <Link href="/agreement" passHref legacyBehavior>
                     <NavigationMenuLink  data-active={active("/agreement")}>Agreement</NavigationMenuLink>
                 </Link>    
-                <NavigationMenuLink>Evaluation</NavigationMenuLink>
+                <Link href="/evaluation" passHref legacyBehavior>
+                    <NavigationMenuLink  data-active={active("/evaluation")}>Evaluation</NavigationMenuLink>
+                </Link>    
             </div>
         </NavigationMenu>
     )

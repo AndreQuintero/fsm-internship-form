@@ -1,5 +1,5 @@
 "use client"
-import { NotebookPen, PanelRightOpen, PenLine } from "lucide-react"
+import { NotebookPen, PanelRightOpen, PencilRuler, PenLine } from "lucide-react"
 import { Sidebar, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarTrigger, useSidebar } from "./sidebar"
 import Link from "next/link"
 import { useEffect } from "react"
@@ -39,6 +39,11 @@ export const MenuMobile = () => {
                                 <SidebarMenuButton asChild>
                                     <Link href="/agreement" passHref legacyBehavior>
                                         <span className={`flex gap-2 cursor-pointer ${getActiveLinkClass("/agreement")}`}> <NotebookPen /> Agreement</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                                <SidebarMenuButton asChild>
+                                    <Link href="/evaluation" passHref legacyBehavior>
+                                        <span className={`flex gap-2 cursor-pointer ${getActiveLinkClass("/evaluation")}`}> <PencilRuler /> Evaluation</span>
                                     </Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
