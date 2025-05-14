@@ -3,6 +3,7 @@ import { BaseTemplate } from "@/components/template/base";
 import { AgreementData, getAgreementByHashId } from "../services/db/agreement";
 import { FormStatus } from "../services/form";
 import { checkExpiration } from "../services/agreement";
+import { use } from "react";
 
 const fetchAgreementData = async (hash_id?: string) => {
   if(!hash_id) return null
@@ -25,9 +26,9 @@ type AgreementPageProps = {
   searchParams: Promise<{ hash_id?: string }>
 }
 
-export default async function Agreement({ searchParams }: AgreementPageProps) {
-    const { hash_id } =  await searchParams
-    const data = await fetchAgreementData(hash_id)
+export default function Agreement({ searchParams }: AgreementPageProps) {
+    const { hash_id } = use(searchParams)
+    const data = use(fetchAgreementData(hash_id))
     
     
     const getStatus = (data: AgreementData | null): FormStatus => {
