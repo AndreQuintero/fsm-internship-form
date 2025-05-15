@@ -46,3 +46,50 @@ export type ApplicationFormData = z.infer<typeof formSchema>
 export type FormApplicationProps = {
     form: UseFormReturn<ApplicationFormData>
 }
+
+export const DEFAULT_VALUES = {
+  name: "",
+  birthDate: undefined,
+  email: "",
+  organizationName: "",
+  webpage: "",
+  streetLine1: "",
+  streetLine2: "",
+  streetLine3: "",
+  city: "",
+  state: "",
+  nation: "",
+  zipCode: "",
+  supervisorName: "",
+  title: "",
+  supervisorEmail: "",
+  supervisorPhone: "",
+  startDate: undefined,
+  endDate: undefined,
+  jobDescription: ""
+}
+
+export const applicationAccordionErrorMapping: Record<
+  AccordionForms,
+  (keyof ApplicationFormData)[]
+> = {
+  [AccordionForms.STUDENTS]: ["name", "email", "birthDate"],
+  [AccordionForms.WORKSITE]: [
+    "organizationName",
+    "webpage",
+    "streetLine1",
+    "streetLine2",
+    "streetLine3",
+    "city",
+    "state",
+    "nation",
+    "zipCode"
+  ],
+  [AccordionForms.WORKSITE_SUPERVISOR]: [
+    "supervisorName",
+    "title",
+    "supervisorEmail",
+    "supervisorPhone"
+  ],
+  [AccordionForms.WORK_SCHEDULE]: ["startDate", "endDate", "jobDescription"]
+};
