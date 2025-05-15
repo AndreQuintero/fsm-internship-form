@@ -31,9 +31,7 @@ const FormComponent = ({ data }: AgreementFormProps) => {
     
     const form = useForm<AgreementFormData>({
         resolver: zodResolver(formSchema),      
-        defaultValues: {
-            ...getRetrievedData()
-        },
+        defaultValues: getRetrievedData(),
         mode: "all"
     });
     const clearSignature = () => {
