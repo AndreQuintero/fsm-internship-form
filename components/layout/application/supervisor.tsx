@@ -1,16 +1,13 @@
 import { AccordionForms, FormApplicationProps } from "@/app/services/application-form";
-import { AccordionTrigger, AccordionItem, AccordionContent } from "@/components/ui/accordion";
+import { AccordionItem, AccordionContent } from "@/components/ui/accordion";
+import { AccordionTitle } from "@/components/ui/accordion-title";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
 export const SupervisorInformation = ({ form }: FormApplicationProps) => {
     return (
         <AccordionItem value={AccordionForms.WORKSITE_SUPERVISOR}>
-            <AccordionTrigger>
-            <div className="mt-3 mb-3">
-                <h2 className="font-bold text-xl lg:text-3xl">Worksite Supervisor Contact</h2>
-            </div>
-            </AccordionTrigger>
+            <AccordionTitle title="Worksite Supervisor Contact"/>
             <AccordionContent>
             <div className="space-y-8">
                 <FormField 

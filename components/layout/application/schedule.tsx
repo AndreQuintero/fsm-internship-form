@@ -1,4 +1,4 @@
-import { AccordionTrigger, AccordionItem, AccordionContent } from "@/components/ui/accordion";
+import { AccordionItem, AccordionContent } from "@/components/ui/accordion";
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
@@ -8,15 +8,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { AccordionForms, FormApplicationProps } from "@/app/services/application-form";
 import { DatePicker } from "@/components/ui/date-picker";
 import { disableDaysBeforeToday } from "@/app/services/date";
+import { AccordionTitle } from "@/components/ui/accordion-title";
 
 export const ScheduleInformation = ({ form }: FormApplicationProps) => {
     return (
         <AccordionItem value={AccordionForms.WORK_SCHEDULE}>
-            <AccordionTrigger>
-            <div className="mt-3 mb-3">
-                <h2 className="font-bold text-xl lg:text-3xl">Work Schedule</h2>
-            </div>
-            </AccordionTrigger>
+            <AccordionTitle title="Work Schedule"/>
             <AccordionContent>
             <div className="space-y-8">
                 <FormField

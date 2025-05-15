@@ -1,4 +1,4 @@
-import { AccordionTrigger, AccordionItem, AccordionContent } from "@/components/ui/accordion";
+import { AccordionItem, AccordionContent } from "@/components/ui/accordion";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -7,6 +7,7 @@ import { CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AccordionForms, FormApplicationProps } from "@/app/services/application-form";
 import { DatePicker } from "@/components/ui/date-picker";
+import { AccordionTitle } from "@/components/ui/accordion-title";
 
 
 
@@ -14,11 +15,7 @@ import { DatePicker } from "@/components/ui/date-picker";
 export const StudentsInformation = ({ form }: FormApplicationProps) => {
     return (
         <AccordionItem value={AccordionForms.STUDENTS}>
-            <AccordionTrigger>
-            <div className="mt-3 mb-3">
-                <h2 className="font-bold text-xl lg:text-3xl">Student&apos;s Information</h2>
-            </div>
-            </AccordionTrigger>
+            <AccordionTitle title="Student&apos;s Information"/>
             <AccordionContent>
             <div className="space-y-8">
                 <FormField
