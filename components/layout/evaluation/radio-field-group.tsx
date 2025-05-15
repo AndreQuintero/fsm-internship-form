@@ -20,7 +20,7 @@ export const RadioFieldGroup = ({ form, label, name }: RadioGroupProps) => {
                     <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="flex flex-row space-x-3.5"
+                        className="flex flex-row flex-wrap space-x-3.5"
                     >
                         { Object.values(EvaluationValues).map( value => (
                             <FormItem key={`${name}-${value}`} className="flex items-center">
