@@ -19,7 +19,7 @@ export const RadioFieldGroup = ({ form, label, name }: RadioGroupProps) => {
                 <FormControl>
                     <RadioGroup
                         onValueChange={field.onChange}
-                        defaultValue={field.value}
+                        value={field.value}
                         className="flex flex-row flex-wrap space-x-3.5"
                     >
                         { Object.values(EvaluationValues).map( value => (
