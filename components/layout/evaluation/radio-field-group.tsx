@@ -12,7 +12,7 @@ export const RadioFieldGroup = ({ form, label, name }: RadioGroupProps) => {
   return (
     <FormField
         control={form.control}
-        name="spiritualMaturity"
+        name={name}
         render={({ field }) => (
             <FormItem className="space-y-3">
                 <FormLabel className="text-lg text-primary">{label}</FormLabel>
