@@ -7,7 +7,7 @@ export const SupervisionSection = ({ form }: FormEvaluationProps) => {
     return (
         <AccordionItem value={AccordionForms.SUPERVISION}>
             <AccordionTitle title="Supervision & Growth"/>
-            <AccordionContent className="space-y-7">
+            <AccordionContent className="space-y-10">
                 <RadioFieldGroup 
                     name="meetSupervisor"
                     form={form} 

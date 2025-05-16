@@ -7,7 +7,7 @@ export const SpiritualSection = ({ form }: FormEvaluationProps) => {
     return (
         <AccordionItem value={AccordionForms.SPIRITUAL}>
             <AccordionTitle title="Spiritual & Ministry Development"/>
-            <AccordionContent className="space-y-7">
+            <AccordionContent className="space-y-10">
                 <RadioFieldGroup 
                     name="spiritualMaturity"
                     form={form} 

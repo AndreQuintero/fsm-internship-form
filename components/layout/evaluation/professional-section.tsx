@@ -7,7 +7,7 @@ export const ProfessionalSection = ({ form }: FormEvaluationProps) => {
     return (
         <AccordionItem value={AccordionForms.PROFESSIONAL}>
             <AccordionTitle title="Professional & Leadership Skill"/>
-            <AccordionContent className="space-y-7">
+            <AccordionContent className="space-y-10">
                 <RadioFieldGroup 
                     name="maintainsProfessionalism"
                     form={form} 
