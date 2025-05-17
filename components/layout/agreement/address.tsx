@@ -1,4 +1,5 @@
 import { FormAgreementProps } from "@/app/services/agreement-form";
+import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
@@ -48,13 +49,17 @@ export const Address = ({ form }: FormAgreementProps) => {
                 control={form.control}
                 name="nation"
                 render={({ field }) => (
-                <FormItem>
+                    <FormItem>
                     <FormLabel>Nation:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
+                    <CountryDropdown
+                        placeholder="Select a country"
+                        defaultValue={field.value}
+                        onChange={(country) => {
+                            field.onChange(`${country.emoji ?? ""} ${country.name}`)
+                        }}
+                    />
                     <FormMessage />
-                </FormItem>
+                    </FormItem>
                 )}
             />
             <FormField

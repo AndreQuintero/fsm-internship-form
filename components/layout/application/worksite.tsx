@@ -1,6 +1,7 @@
 import { AccordionForms, FormApplicationProps } from "@/app/services/application-form";
 import { AccordionItem, AccordionContent } from "@/components/ui/accordion";
 import { AccordionTitle } from "@/components/ui/accordion-title";
+import { CountryDropdown } from "@/components/ui/country-dropdown";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
@@ -101,18 +102,22 @@ export const WorksiteInformation = ({ form }: FormApplicationProps) => {
                     </FormItem>
                 )}
                 />
-                <FormField 
-                control={form.control}
-                name="nation"
-                render={({ field }) => (
-                    <FormItem>
+                <FormField
+                    control={form.control}
+                    name="nation"
+                    render={({ field }) => (
+                        <FormItem>
                         <FormLabel>Nation:</FormLabel>
-                        <FormControl>
-                            <Input {...field} />
-                        </FormControl>
+                        <CountryDropdown
+                            placeholder="Select a country"
+                            defaultValue={field.value}
+                            onChange={(country) => {
+                                field.onChange(`${country.emoji ?? ""} ${country.name}`)
+                            }}
+                        />
                         <FormMessage />
-                    </FormItem>
-                )}
+                        </FormItem>
+                    )}
                 />
                 <FormField 
                 control={form.control}

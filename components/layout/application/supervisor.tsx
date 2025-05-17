@@ -1,8 +1,9 @@
 import { AccordionForms, FormApplicationProps } from "@/app/services/application-form";
 import { AccordionItem, AccordionContent } from "@/components/ui/accordion";
 import { AccordionTitle } from "@/components/ui/accordion-title";
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { PhoneInput } from "@/components/ui/phone-input";
 
 export const SupervisorInformation = ({ form }: FormApplicationProps) => {
     return (
@@ -49,18 +50,26 @@ export const SupervisorInformation = ({ form }: FormApplicationProps) => {
                     </FormItem>
                 )}
                 />
-                <FormField 
-                control={form.control}
-                name="supervisorPhone"
-                render={({ field }) => (
+                <FormField
+                    control={form.control}
+                    name="supervisorPhone"
+                    render={({ field }) => (
                     <FormItem>
                         <FormLabel>Phone:</FormLabel>
                         <FormControl>
-                            <Input {...field} />
+                        <PhoneInput
+                            {...field}
+                            value={field.value}
+                            placeholder="Enter your number"
+                        
+                        />
                         </FormControl>
+                        <FormDescription>
+                        Include country code (e.g. +44)
+                        </FormDescription>
                         <FormMessage />
                     </FormItem>
-                )}
+                    )}
                 />
             </div>
             </AccordionContent>

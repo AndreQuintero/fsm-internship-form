@@ -1,6 +1,7 @@
 import { FormEvaluationProps } from "@/app/services/evaluation-form"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
 
 export const Personal = ({ form }: FormEvaluationProps) => {
   return (
@@ -44,17 +45,25 @@ export const Personal = ({ form }: FormEvaluationProps) => {
                 </FormItem>
             )}
         />
-        <FormField
+       <FormField
             control={form.control}
             name="supervisorPhone"
             render={({ field }) => (
-                <FormItem>
-                    <FormLabel>Site Supervisor Phone Number:</FormLabel>
-                    <FormControl>
-                        <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                </FormItem>
+            <FormItem>
+                <FormLabel>Site Supervisor Phone Number:</FormLabel>
+                <FormControl>
+                <PhoneInput
+                    {...field}
+                    value={field.value}
+                    placeholder="Enter your number"
+                
+                />
+                </FormControl>
+                <FormDescription>
+                Include country code (e.g. +44)
+                </FormDescription>
+                <FormMessage />
+            </FormItem>
             )}
         />
     </div>

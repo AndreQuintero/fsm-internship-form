@@ -1,6 +1,7 @@
 import { FormAgreementProps } from "@/app/services/agreement-form"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
 
 export const PersonalInfo = ({ form }: FormAgreementProps) => {
     return (
@@ -64,8 +65,16 @@ export const PersonalInfo = ({ form }: FormAgreementProps) => {
                 <FormItem>
                     <FormLabel>Phone:</FormLabel>
                     <FormControl>
-                        <Input {...field} />
+                    <PhoneInput
+                        {...field}
+                        value={field.value}
+                        placeholder="Enter your number"
+                    
+                    />
                     </FormControl>
+                    <FormDescription>
+                    Include country code (e.g. +44)
+                    </FormDescription>
                     <FormMessage />
                 </FormItem>
                 )}
