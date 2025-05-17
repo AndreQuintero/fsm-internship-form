@@ -12,7 +12,7 @@ export const WorksiteInformation = ({ form }: FormApplicationProps) => {
         <AccordionItem value={AccordionForms.WORKSITE}>
             <AccordionTitle title="Worksite Information"/>
             <AccordionContent>
-            <div className="space-y-8">
+            <div className="space-y-4">
                 <Row>
                     <FormField 
                         control={form.control}
@@ -87,7 +87,7 @@ export const WorksiteInformation = ({ form }: FormApplicationProps) => {
                         control={form.control}
                         name="nation"
                         render={({ field }) => (
-                            <FormItemWrapper label="Country:" message={<FormMessage />}>
+                            <FormItemWrapper label="Nation:" message={<FormMessage />}>
                                 <CountryDropdown
                                     placeholder="Select a country"
                                     defaultValue={field.value}

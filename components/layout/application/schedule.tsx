@@ -17,7 +17,7 @@ export const ScheduleInformation = ({ form }: FormApplicationProps) => {
         <AccordionItem value={AccordionForms.WORK_SCHEDULE}>
             <AccordionTitle title="Work Schedule"/>
             <AccordionContent>
-            <div className="space-y-8">
+            <div className="space-y-4">
                 <Row>
                     <FormField
                         control={form.control}

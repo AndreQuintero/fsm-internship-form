@@ -12,7 +12,7 @@ export const SupervisorInformation = ({ form }: FormApplicationProps) => {
         <AccordionItem value={AccordionForms.WORKSITE_SUPERVISOR}>
             <AccordionTitle title="Worksite Supervisor Contact"/>
             <AccordionContent>
-            <div className="space-y-8">
+            <div className="space-y-4">
                 <Row>
                     <FormField 
                         control={form.control}
