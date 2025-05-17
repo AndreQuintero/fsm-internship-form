@@ -9,6 +9,8 @@ import { AccordionForms, FormApplicationProps } from "@/app/services/application
 import { DatePicker } from "@/components/ui/date-picker";
 import { disableDaysBeforeToday } from "@/app/services/date";
 import { AccordionTitle } from "@/components/ui/accordion-title";
+import { Row } from "@/components/ui/row";
+import { FormItemWrapper } from "@/components/ui/form-item-wrapper";
 
 export const ScheduleInformation = ({ form }: FormApplicationProps) => {
     return (
@@ -16,62 +18,60 @@ export const ScheduleInformation = ({ form }: FormApplicationProps) => {
             <AccordionTitle title="Work Schedule"/>
             <AccordionContent>
             <div className="space-y-8">
-                <FormField
-                control={form.control}
-                name="startDate"
-                render={({ field }) => (
-                    <FormItem className="flex flex-col">
-                    <FormLabel>Start date:</FormLabel>
-                    <DatePicker date={field.value} onChange={field.onChange} onDisable={disableDaysBeforeToday}>
-                        <FormControl>
-                            <Button
-                            variant={"outline"}
-                            className={cn(
-                                "pl-3 text-left font-normal",
-                                !field.value && "text-muted-foreground"
-                            )}
-                            >
-                            {field.value ? (
-                                format(field.value, "PPP")
-                            ) : (
-                                <span>Pick a date</span>
-                            )}
-                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                        </FormControl>
-                    </DatePicker>
-                    <FormMessage />
-                    </FormItem>
-                )}
-                />
-                <FormField
-                control={form.control}
-                name="endDate"
-                render={({ field }) => (
-                    <FormItem className="flex flex-col">
-                    <FormLabel>End date:</FormLabel>
-                    <DatePicker date={field.value} onChange={field.onChange} onDisable={disableDaysBeforeToday}>
-                        <FormControl>
-                            <Button
-                            variant={"outline"}
-                            className={cn(
-                                "pl-3 text-left font-normal",
-                                !field.value && "text-muted-foreground"
-                            )}
-                            >
-                            {field.value ? (
-                                format(field.value, "PPP")
-                            ) : (
-                                <span>Pick a date</span>
-                            )}
-                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                        </FormControl>
-                    </DatePicker>
-                    <FormMessage />
-                    </FormItem>
-                )}
-                />
+                <Row>
+                    <FormField
+                        control={form.control}
+                        name="startDate"
+                        render={({ field }) => (
+                            <FormItemWrapper label="Start Date:" message={<FormMessage />}>
+                                <DatePicker date={field.value} onChange={field.onChange} onDisable={disableDaysBeforeToday}>
+                                    <FormControl>
+                                        <Button
+                                        variant={"outline"}
+                                        className={cn(
+                                            "pl-3 text-left font-normal",
+                                            !field.value && "text-muted-foreground"
+                                        )}
+                                        >
+                                        {field.value ? (
+                                            format(field.value, "PPP")
+                                        ) : (
+                                            <span>Pick a date</span>
+                                        )}
+                                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                        </Button>
+                                    </FormControl>
+                                </DatePicker>
+                            </FormItemWrapper>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="endDate"
+                        render={({ field }) => (
+                            <FormItemWrapper label="End Date:" message={<FormMessage />}>
+                                <DatePicker date={field.value} onChange={field.onChange} onDisable={disableDaysBeforeToday}>
+                                    <FormControl>
+                                        <Button
+                                        variant={"outline"}
+                                        className={cn(
+                                            "pl-3 text-left font-normal",
+                                            !field.value && "text-muted-foreground"
+                                        )}
+                                        >
+                                        {field.value ? (
+                                            format(field.value, "PPP")
+                                        ) : (
+                                            <span>Pick a date</span>
+                                        )}
+                                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                        </Button>
+                                    </FormControl>
+                                </DatePicker>
+                            </FormItemWrapper>
+                        )}
+                    />
+                </Row>
                 <FormField 
                 control={form.control}
                 name="jobDescription"
