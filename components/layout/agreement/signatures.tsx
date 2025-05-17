@@ -1,5 +1,6 @@
 import { FormAgreementProps } from "@/app/services/agreement-form"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import {  FormField, FormMessage } from "@/components/ui/form"
+import { FormItemWrapper } from "@/components/ui/form-item-wrapper"
 import { SignaturePad, SignaturePadRef } from "@/components/ui/signature-pad"
 import { RefObject } from "react"
 
@@ -15,26 +16,18 @@ export const Signatures = ({ form, studentRef, supervisorRef }: SignaturesProps)
                 control={form.control}
                 name="studentSignature"
                 render={() => (
-                <FormItem>
-                    <FormLabel>Student Signature:</FormLabel>
-                    <FormControl>
+                    <FormItemWrapper label="Student Signature:" message={<FormMessage />}>
                         <SignaturePad ref={studentRef} name="studentSignature" />
-                    </FormControl>
-                    <FormMessage />
-                </FormItem>
+                    </FormItemWrapper>
                 )}
             />
             <FormField
                 control={form.control}
                 name="supervisorSignature"
                 render={() => (
-                <FormItem>
-                    <FormLabel>Supervisor Signature:</FormLabel>
-                    <FormControl>
+                    <FormItemWrapper label="Supervisor Signature:" message={<FormMessage />}>
                         <SignaturePad ref={supervisorRef} name="supervisorSignature" />
-                    </FormControl>
-                    <FormMessage />
-                </FormItem>
+                    </FormItemWrapper>
                 )}
             />
         </>
