@@ -9,7 +9,7 @@ export const Instructions = () => {
         specific criteria so that the student is strengthened as a leader personally and professionally.
       </p>
       <p className="mt-3 text-primary">
-        Directions: Place an X in the box that best describes your perceptions of the 
+        Directions: select in the box that best describes your perceptions of the 
         student’s skills compared to all other people you have trained at 
         the same level of professional development.
       </p>
