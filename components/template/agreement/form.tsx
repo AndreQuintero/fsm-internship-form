@@ -43,7 +43,7 @@ const FormComponent = ({ data }: AgreementFormProps) => {
     return (
         <Form {...form}>
             <form className="mt-10" onSubmit={form.handleSubmit(onSubmit)}>
-                <div className="space-y-8 mb-3.5">
+                <div className="space-y-4 mb-2.5">
                     <PersonalInfo form={form}/>
                     <Address form={form}/>
                     <InternshipDate form={form}/>
